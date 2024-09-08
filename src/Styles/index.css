@@ -1,0 +1,222 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+html {
+  height: 100%;
+}
+
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://cdn.pixabay.com/photo/2015/10/31/12/06/tooth-1015404_1280.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: blur(10px); /* Difuminar la imagen de fondo */
+  z-index: -1;
+  opacity: 1; /* Hacer que el fondo sea más sutil */
+}
+
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.favButton {
+  background-color: rgba(136, 136, 136, 0.116);
+  padding: 10px;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+
+
+h1 {
+  text-align: center;
+  font-size: 10rem;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+p {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+}
+
+
+
+nav {
+  display: flex;
+  width: 80vw;
+  justify-content: flex-start;
+  padding: 1rem;
+}
+
+
+
+footer {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  bottom: 0;
+  width: 90%;
+  height: 40px;
+  margin-top: 2rem;
+}
+
+footer>img {
+  width: 200px;
+  margin: 0;
+}
+
+footer>p {
+  margin: 0;
+  padding-top: 0.7rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 300px;
+  height: 100px;
+  margin: 0 auto;
+}
+
+.card {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  padding: 0.5rem 0.5rem 0 0.5rem;
+  border: 0.5px solid rgb(136, 136, 136);
+}
+
+.card:hover {
+  border: 0.5px solid rgb(206, 217, 142);
+}
+
+.card-grid {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1rem;
+  width: 90vw;
+  height: auto;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  display: table;
+  border: 1px solid #ccc;
+
+}
+
+td,th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.dark {
+  background-color: #892c2c96;
+  color: white;
+}
+
+.dark>a {
+  color: white;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  padding: 10px 25px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  font-weight: bold;
+  position: relative; /* Necesario para que ::before se posicione relativo al enlace */
+  transition: color 0.3s ease; /* Transición para el color */
+}
+
+a::before {
+  content: '';
+  position: absolute;
+  bottom: 0; /* Coloca la línea justo debajo del enlace */
+  left: 0;
+  width: 0;
+  height: 3px;
+  background-color: #ef220b;
+  transition: width 0.5s ease; /* Controla la velocidad de la animación */
+}
+
+a:hover::before {
+  width: 100%; /* Hace que la línea se expanda de izquierda a derecha */
+}
+
+a:hover {
+  color: #ef220b; /* Cambia el color del texto al hacer hover */
+}
+
+.glowing-text {
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #ff4e50, 0 0 20px #ff4e50, 0 0 30px #ff4e50, 0 0 40px #ff4e50, 0 0 50px #ff4e50;
+  }
+  to {
+    text-shadow: 0 0 20px #ff4e50, 0 0 30px #ff4e50, 0 0 40px #ff4e50, 0 0 60px #ff4e50, 0 0 80px #ff4e50;
+  }
+}
+
+.navbar {
+  background-color: rgb(0, 0, 0);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  color: #fff;
+}
