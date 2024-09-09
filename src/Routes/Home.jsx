@@ -11,7 +11,6 @@ const Home = () => {
       <h2>Home</h2>
       <div className='card-grid'>
         {/* Aqui deberias renderizar las cards */}
-        
         {state.recipes.map((recipe) => (
           <Card key={recipe.id} recipe={recipe}/>
         ))}

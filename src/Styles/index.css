@@ -11,10 +11,13 @@ body {
   height: 100%;
 }
 
-html {
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
   height: 100%;
+  overflow-x: hidden; /* Evita el scroll horizontal en la página */
 }
-
 
 body::before {
   content: '';
@@ -44,14 +47,22 @@ code {
   cursor: pointer;
 }
 
-.container {
+/* .container {
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
+} */
+
+.container {
+  min-height: 100vh; /* Asegura que el contenedor ocupe al menos el 100% de la altura del viewport */
+  display: flex;
+  flex-direction: column;
 }
 
-
+.content {
+  flex: 1; /* Esto permitirá que el contenido crezca y empuje el footer hacia abajo */
+}
 
 h1 {
   text-align: center;
@@ -83,20 +94,60 @@ nav {
 
 
 
-footer {
-  display: flex;
-  justify-content: center;
+/* Footer general styling */
+.footer {
+  background-color: #f90d0d;
+  padding: 10px 0;
   text-align: center;
-  padding: 2rem;
+  width: 100%;
   position: relative;
   bottom: 0;
-  width: 90%;
-  height: 40px;
-  margin-top: 2rem;
+  left: 0;
+  margin-top: 50px;
+}
+
+/* Contenedor del contenido del footer */
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+}
+
+/* Estilo del logo */
+.footer-logo {
+  display: flex; /* Hacemos que el contenedor use flexbox */
+  align-items: center; /* Alineamos verticalmente la imagen y el texto */
+  justify-content: center; /* Alineamos horizontalmente el texto y la imagen */
+}
+
+/* Estilo del logo */
+.footer-logo img {
+  height: 30px;
+  width: auto;
+  margin-left: 10px; /* Un pequeño margen para separar el texto de la imagen */
+}
+
+/* Estilo de los iconos */
+.footer-icons img {
+  height: 30px;
+  margin: 0 10px;
+  transition: transform 0.2s;
+}
+
+/* Efecto hover en los iconos sociales */
+.footer-icons img:hover {
+  transform: scale(1.2);
+}
+
+/* Asegura que los íconos estén alineados correctamente */
+.footer-icons a {
+  text-decoration: none;
+  display: inline-block;
 }
 
 footer>img {
-  width: 200px;
+  width: 500px;
   margin: 0;
 }
 
@@ -105,13 +156,80 @@ footer>p {
   padding-top: 0.7rem;
 }
 
+/* Estilos generales para el formulario */
 form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 300px;
-  height: 100px;
+  max-width: 400px;
   margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form div {
+  margin-bottom: 15px;
+}
+
+/* Estilo para los labels */
+form label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Estilo para los inputs */
+form input[type="text"],
+form input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+  box-sizing: border-box;
+  transition: border 0.3s ease;
+}
+
+/* Cambiar el color del borde cuando el campo está en foco */
+form input[type="text"]:focus,
+form input[type="email"]:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+/* Estilo para el botón de enviar */
+form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007BFF;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo para los mensajes de error */
+form p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* Estilos para el mensaje de error */
+form p[style*="red"] {
+  color: red;
+}
+
+/* Estilos para el mensaje de éxito */
+form p[style*="green"] {
+  color: green;
 }
 
 .card {
@@ -194,7 +312,7 @@ a::before {
   left: 0;
   width: 0;
   height: 3px;
-  background-color: #ef220b;
+  background-color: #f90d0d;
   transition: width 0.5s ease; /* Controla la velocidad de la animación */
 }
 
