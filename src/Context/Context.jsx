@@ -1,5 +1,5 @@
 import axios from "axios";
-import {createContext,useContext,useState,useEffect,useReducer,} from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 
 // recipes: [], son los cards de dentistas bucadas por primera ves --> DATA
 // favs: [],    son las cards de dentistas agrupadas por favoritas
@@ -8,7 +8,7 @@ import {createContext,useContext,useState,useEffect,useReducer,} from "react";
 const initialState = {
   recipes: [],
   favs: [],
-  theme: "",
+  theme: "light", // Definimos el tema inicial como 'light'
   currentRecipe: [],
 };
 
@@ -19,27 +19,25 @@ const reducer = (state, action) => {
     case "GET_RECIPES":
       return { ...state, recipes: action.payload };
     case "GET_RECIPES_DETAILS":
-        return {...state , currentRecipe : action.payload};
+      return { ...state, currentRecipe: action.payload };
     case "ADD_FAVS":
-       // Verificar si el favorito ya existe
-       const exists = state.favs.some(fav => fav.id === action.payload.id);
-       if (exists) {
-         return state; // Si ya existe, no hacemos nada
-       }
-        // Actualizamos el arreglo de favoritos
-      const updatedFavs = [...state.favs, action.payload];
-      
-      // Guardamos los favoritos en localStorage
-      localStorage.setItem('favs', JSON.stringify(updatedFavs));
-
+      const exists = state.favs.some((fav) => fav.id === action.payload.id); // Verificar si el favorito ya existe
+      if (exists) {
+        return state; // Si ya existe, no hacemos nada
+      }
+      const updatedFavs = [...state.favs, action.payload]; // Actualizamos el arreglo de favoritos
+      localStorage.setItem("favs", JSON.stringify(updatedFavs)); // Guardamos los favoritos en localStorage
       return { ...state, favs: updatedFavs };
     case "DELETE_FAV": //Lo dejo de tarea utilizar un .filter()
-       // Filtramos el favorito que queremos eliminar
-      const filteredFavs = state.favs.filter(fav => fav.id !== action.payload.id);
-      // Actualizamos el localStorage
-      // el arreglo de fav lo convierte en una cadena de texto  en formato JSON.
-      localStorage.setItem('favs', JSON.stringify(filteredFavs));
+      const filteredFavs = state.favs.filter(
+        (fav) => fav.id !== action.payload.id
+      ); // Filtramos el favorito que queremos eliminar
+      localStorage.setItem("favs", JSON.stringify(filteredFavs)); // Actualizamos el localStorage el arreglo de fav lo convierte en una cadena de texto  en formato JSON.
       return { ...state, favs: filteredFavs };
+    case "INIT_FAVS":
+      return { ...state, favs: action.payload }; // Inicializamos los favoritos con los datos del localStorage
+      case "TOGGLE_THEME":
+        return { ...state, theme: state.theme === "light" ? "dark" : "light" }; // Cambiamos el tema entre 'light' y 'dark'
     default:
       throw new Error();
   }
@@ -49,18 +47,17 @@ const Context = ({ children }) => {
   //Aqui deberan implementar la logica propia del Context, utilizando el hook useMemo
 
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state);
   const url = "https://jsonplaceholder.typicode.com/users";
 
-  
   useEffect(() => {
+    // Cargar favoritos desde el localStorage
+    const storedFavs = JSON.parse(localStorage.getItem("favs")) || [];
+    if (storedFavs.length > 0) {
+      // Usamos "INIT_FAVS" para inicializar el array completo
+      dispatch({ type: "INIT_FAVS", payload: storedFavs });
+    }
 
-     // Cargar favoritos desde el localStorage
-     const storedFavs = JSON.parse(localStorage.getItem('favs')) || [];
-     if (storedFavs.length > 0) {
-       dispatch({ type: 'ADD_FAVS', payload: storedFavs });
-     }
-
+     // Obtener los dentistas
     axios(url).then((res) => {
       console.log(res.data);
       dispatch({ type: "GET_RECIPES", payload: res.data });
@@ -69,11 +66,11 @@ const Context = ({ children }) => {
 
   // Funcion de obtencionde detalle
   const getRecipeDetail = (id) => {
-    axios(`${url}/${id}`).then((res) =>{
-      console.log(res.data.id ++);
-      dispatch({ type: 'GET_RECIPES_DETAILS', payload: res.data});
-    })
-  }
+    axios(`${url}/${id}`).then((res) => {
+      console.log(res.data.id++);
+      dispatch({ type: "GET_RECIPES_DETAILS", payload: res.data });
+    });
+  };
 
   return (
     <ContextGlobal.Provider value={{ state, dispatch, getRecipeDetail }}>
@@ -81,6 +78,7 @@ const Context = ({ children }) => {
     </ContextGlobal.Provider>
   );
 };
+
 export default Context;
 
 export const useContextGlobal = () => useContext(ContextGlobal);

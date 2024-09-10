@@ -9,7 +9,7 @@ const NotFound = () => {
       <h2>Página no encontrada</h2>
       <p>Lo sentimos, la página que estás buscando no existe.</p>
       {/* Agregar un link de retorno a la a la home */}
-      <Link to={routes.home} style={{ color: 'rgb(0, 0, 0)' }}>Regresar</Link>
+      <Link to={routes.home} >Regresar</Link>
     </div>
   );
 };

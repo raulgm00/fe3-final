@@ -8,6 +8,7 @@ const Favs = () => {
   const { state } = useContextGlobal();
   const { favs } = state;
 
+  
   return (
     <>
       <h2>Dentists Favs</h2>

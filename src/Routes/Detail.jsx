@@ -13,7 +13,8 @@ const Detail = () => {
   
   useEffect(() => {
     getRecipeDetail(params.id); // Usamos el contexto para obtener el detalle
-  }, [params.id]);
+  }, [params.id],getRecipeDetail);
+  
 
 
   return (

@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { useContextGlobal } from "../Context/Context";
 
 const Card = ({ recipe, isInFavsPage }) => {
-  const { name, username, id } = recipe;
 
+  const { name, username, id } = recipe;
   const { dispatch } = useContextGlobal();
 
   const addFav = () => {
@@ -28,13 +28,13 @@ const Card = ({ recipe, isInFavsPage }) => {
       {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage */}
 
       {!isInFavsPage ? (
-        <Button onClick={addFav}>Add fav</Button>
+        <Button onClick={addFav}>⭐</Button>
       ) : (
-        <Button onClick={deleteFav}>Remove from favs</Button>
+        <Button onClick={deleteFav}>❌</Button>
       )}
 
       {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}
-      <Link to={"/detail/" + id} style={{ color: "rgb(0, 0, 0)" }}>
+      <Link to={"/detail/" + id} >
         Ver detalle
       </Link>
     </div>
