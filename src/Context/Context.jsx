@@ -22,18 +22,23 @@ const reducer = (state, action) => {
       return { ...state, currentRecipe: action.payload };
     case "ADD_FAVS":
       const exists = state.favs.some((fav) => fav.id === action.payload.id); // Verificar si el favorito ya existe
+      
+      // Si ya existe, no hacemos nada
       if (exists) {
-        return state; // Si ya existe, no hacemos nada
+        return state; 
       }
+
       const updatedFavs = [...state.favs, action.payload]; // Actualizamos el arreglo de favoritos
       localStorage.setItem("favs", JSON.stringify(updatedFavs)); // Guardamos los favoritos en localStorage
       return { ...state, favs: updatedFavs };
-    case "DELETE_FAV": //Lo dejo de tarea utilizar un .filter()
-      const filteredFavs = state.favs.filter(
-        (fav) => fav.id !== action.payload.id
-      ); // Filtramos el favorito que queremos eliminar
+    case "DELETE_FAV": 
+      //Lo dejo de tarea utilizar un .filter()
+      const filteredFavs = state.favs.filter((fav) => fav.id !== action.payload.id); 
+      
+      // Filtramos el favorito que queremos eliminar
       localStorage.setItem("favs", JSON.stringify(filteredFavs)); // Actualizamos el localStorage el arreglo de fav lo convierte en una cadena de texto  en formato JSON.
       return { ...state, favs: filteredFavs };
+
     case "INIT_FAVS":
       return { ...state, favs: action.payload }; // Inicializamos los favoritos con los datos del localStorage
       case "TOGGLE_THEME":
@@ -50,9 +55,11 @@ const Context = ({ children }) => {
   const url = "https://jsonplaceholder.typicode.com/users";
 
   useEffect(() => {
+    
     // Cargar favoritos desde el localStorage
     const storedFavs = JSON.parse(localStorage.getItem("favs")) || [];
     if (storedFavs.length > 0) {
+
       // Usamos "INIT_FAVS" para inicializar el array completo
       dispatch({ type: "INIT_FAVS", payload: storedFavs });
     }
