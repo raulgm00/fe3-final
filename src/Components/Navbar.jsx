@@ -24,11 +24,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav
-      className={`navbar uppercase-text ${
-        state.theme === "light" ? "light-theme" : "dark-theme"
-      }`}
-    >
+    <nav className={`navbar uppercase-text`} >
       {/* Aqui deberan agregar los liks correspondientes a las rutas definidas */}
       {/* Deberan implementar ademas la logica para cambiar de Theme con el button */}
       {/* Liks correspondientes a las rutas definidas */}
