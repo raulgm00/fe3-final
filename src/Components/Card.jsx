@@ -21,7 +21,7 @@ const Card = ({ recipe, isInFavsPage }) => {
   return (
     <div className="card">
       {/* En cada card deberan mostrar en name - username y el id */}
-      <img src="../../public/images/doctor.jpg" alt="Dentista" />
+      <img src="./images/doctor.png" alt="Dentista" />
       <h3>{id}</h3>
       <h3>{name}</h3>
       <h3>{username}</h3>
